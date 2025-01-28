@@ -11,10 +11,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-93qqzu0ecnnfd98=uh3ee^zf%dw!0vne#v^72kk$+a-8r#vzez'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [".vercel.app"]
-
+ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = [".vercel.app"]
 
 # Application definition
 
@@ -62,12 +62,32 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'neondb',
+
+        'USER': 'neondb_owner',
+
+        'PASSWORD': 'npg_6k4gAPDeoVQF',
+
+        'HOST': 'ep-lively-sea-a5uvb4p7-pooler.us-east-2.aws.neon.tech',
+
+        'PORT': '5432',
+        }
+        }
+
 
 
 # Password validation
